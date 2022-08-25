@@ -4,6 +4,7 @@ import {
   createContext,
   Dispatch,
   useEffect,
+  ReactNode,
 } from "react";
 import { useRouter } from "next/router";
 
@@ -11,7 +12,7 @@ import { useRouter } from "next/router";
 //   userId?: number;
 // }
 
-const defaultState = { userId: undefined}
+const defaultState = { userId: undefined };
 
 type AuthDispatch = Dispatch<{
   type: string;
@@ -20,7 +21,7 @@ type AuthDispatch = Dispatch<{
 const AuthStateContext = createContext(undefined);
 const AuthDispatchContext = createContext({} as AuthDispatch);
 
-const reducer = (state, action: { type: string; payload: any }) => {
+const reducer = (state: any, action: { type: string; payload: any }) => {
   switch (action.type) {
     case "SET_USER_ID":
       return action.payload;
@@ -29,7 +30,10 @@ const reducer = (state, action: { type: string; payload: any }) => {
   }
 };
 
-export const AuthProvider = ({ children }) => {
+type AuthProviderProps = {
+  children: ReactNode;
+};
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [state, dispatch] = useReducer(reducer, undefined);
   const router = useRouter();
 
@@ -37,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     if (!state) {
       router.push("/login");
     }
-  }, [state]);
+  }, [state, router]);
 
   return (
     <AuthDispatchContext.Provider value={dispatch}>
