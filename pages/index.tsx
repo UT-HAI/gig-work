@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 const Home = dynamic(
-  () => import('./home'),
+  () => import('../components/HomePage/index'),
   { ssr: false }
 )
 

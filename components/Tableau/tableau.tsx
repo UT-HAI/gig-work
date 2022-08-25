@@ -52,7 +52,7 @@ const SimpleReport = () => {
       <button onClick={handleClick}>Click Me!</button>
       <tableau-viz
         id="tableauViz"
-        src="https://public.tableau.com/views/GigWorkMini-GameCollection/GigWorkMini-GameCollection?:language=en-US&:display_count=n&:origin=viz_share_link"
+        src="https://public.tableau.com/views/ChicagoRideshareDataDashboardsv_1_0/NeighborhoodEarnings?:language=en-US&:display_count=n&:origin=viz_share_link"
         style={{ width: "100%" }}
         hide-tabs
         toolbar="hidden"
