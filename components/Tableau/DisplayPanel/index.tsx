@@ -12,7 +12,7 @@ interface TabPanelProps {
 export type Tab = {
   title: string;
   aggregate: ReactElement;
-  personal: ReactElement;
+  personal?: ReactElement;
 };
 
 type DisplayPanelProps = {

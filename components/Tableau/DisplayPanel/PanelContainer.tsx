@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from "react";
 import { Box, Divider, Typography } from "@mui/material";
 
 type PanelProps = {
-  personal: ReactElement;
+  personal?: ReactElement;
   aggregate: ReactElement;
 };
 const PanelContainer = ({ personal, aggregate }: PanelProps) => {

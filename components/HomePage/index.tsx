@@ -9,28 +9,34 @@ import DisplayPanel from "../Tableau/DisplayPanel";
 import type { Tab } from "../Tableau/DisplayPanel";
 import Layout from "../Layout";
 import { useAuth } from "../AuthProvider";
-
-
-const tabs: Tab[] = [
-  {
-    title: "Day Of Week",
-    aggregate: <AggregateEarningsPerDay />,
-    personal: <PersonalEarningsPerDay />,
-  },
-  {
-    title: "Hourly",
-    aggregate: <AggregateEarningsPerHour />,
-    personal: <PersonalEarningsPerHour />,
-  },
-  {
-    title: "Location",
-    aggregate: <AggregateEarningsPerLocation />,
-    personal: <PersonalEarningsPerLocation />,
-  },
-];
+import { users } from "../AuthProvider/users";
 
 const Home: NextPage = () => {
-  const userId = useAuth()
+  const userId = useAuth();
+
+  const tabs: Tab[] = [
+    {
+      title: "Day Of Week",
+      aggregate: <AggregateEarningsPerDay />,
+      personal: userId ? (
+        <PersonalEarningsPerDay id={userId} name={users[userId - 1]} />
+      ) : undefined,
+    },
+    {
+      title: "Hourly",
+      aggregate: <AggregateEarningsPerHour />,
+      personal: userId ? (
+        <PersonalEarningsPerHour id={userId} name={users[userId - 1]} />
+      ) : undefined,
+    },
+    {
+      title: "Location",
+      aggregate: <AggregateEarningsPerLocation />,
+      personal: userId ? (
+        <PersonalEarningsPerLocation id={userId} name={users[userId - 1]} />
+      ) : undefined,
+    },
+  ];
   return (
     <Layout title="Home" userId={userId}>
       <DisplayPanel tabs={tabs} />

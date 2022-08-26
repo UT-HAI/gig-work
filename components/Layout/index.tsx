@@ -7,6 +7,7 @@ import {
   Menu,
   MenuItem,
   Typography,
+  Button,
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -66,8 +67,14 @@ export default function Layout({ children, userId, title }: LayoutProps) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              {title}
+              Gig Work
             </Typography>
+            {/* <Button sx={{ color: '#fff' }}>
+              Schedule
+            </Button>
+            <Button sx={{ color: '#fff' }}>
+              Compare
+            </Button > */}
             <IconButton
               size="large"
               aria-label="account of current user"
