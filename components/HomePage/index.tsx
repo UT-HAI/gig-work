@@ -1,45 +1,16 @@
 import type { NextPage } from "next";
-import AggregateEarningsPerDay from "../Tableau/Aggregate/DayOfWeek";
-import AggregateEarningsPerHour from "../Tableau/Aggregate/Hourly";
-import AggregateEarningsPerLocation from "../Tableau/Aggregate/Location";
-import PersonalEarningsPerDay from "../Tableau/Personal/DayOfWeek";
-import PersonalEarningsPerHour from "../Tableau/Personal/Hourly";
-import PersonalEarningsPerLocation from "../Tableau/Personal/Location";
-import DisplayPanel from "../Tableau/DisplayPanel";
-import type { Tab } from "../Tableau/DisplayPanel";
 import Layout from "../Layout";
-import { useAuth } from "../AuthProvider";
-import { users } from "../AuthProvider/users";
+import { useAuth } from "../Provider/Auth";
+import ContentArea from "../ContentArea";
+import { useAppLocation } from "../Provider/Location";
 
 const Home: NextPage = () => {
   const userId = useAuth();
-
-  const tabs: Tab[] = [
-    {
-      title: "Day Of Week",
-      aggregate: <AggregateEarningsPerDay />,
-      personal: userId ? (
-        <PersonalEarningsPerDay id={userId} name={users[userId - 1]} />
-      ) : undefined,
-    },
-    {
-      title: "Hourly",
-      aggregate: <AggregateEarningsPerHour />,
-      personal: userId ? (
-        <PersonalEarningsPerHour id={userId} name={users[userId - 1]} />
-      ) : undefined,
-    },
-    {
-      title: "Location",
-      aggregate: <AggregateEarningsPerLocation />,
-      personal: userId ? (
-        <PersonalEarningsPerLocation id={userId} name={users[userId - 1]} />
-      ) : undefined,
-    },
-  ];
+  const currentPage = useAppLocation();
+  console.log(currentPage)
   return (
-    <Layout title="Home" userId={userId}>
-      <DisplayPanel tabs={tabs} />
+    <Layout userId={userId}>
+      <ContentArea page={currentPage} />
     </Layout>
   );
 };

@@ -1,4 +1,11 @@
-import React, { ReactNode, useState } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  useContext,
+  useReducer,
+  useState,
+} from "react";
 import Head from "next/head";
 import {
   AppBar,
@@ -10,40 +17,44 @@ import {
   Button,
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MenuIcon from "@mui/icons-material/Menu";
-import AppDrawer from "../Drawer";
-import { users } from "../AuthProvider/users";
+import { users } from "../Provider/Auth/users";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
+import { SCHEDULE_PAGE, useAppLocation, useLocationDispatch } from "../Provider/Location";
 
 type LayoutProps = {
   children?: ReactNode;
   userId?: number;
-  title: string;
-}
-export default function Layout({ children, userId, title }: LayoutProps) {
+};
+export default function Layout({ children, userId }: LayoutProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-
+   const router = useRouter();
+   const dispatch = useLocationDispatch()
+   const page = useAppLocation()
+const isSchedule = page === SCHEDULE_PAGE
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleSwitch = () => {
-    router.push('/login')
+    router.push("/login");
     setAnchorEl(null);
-  }
+  };
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const handleDrawer = () => {
-    setOpen(true);
+  const handleScheduleClick = () => {
+    dispatch({
+      type: "SET_SCHEDULE_PAGE",
+    });
+
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleCompareClick = () => {
+    dispatch({
+      type: "SET_COMPARE_PAGE",
+    });
   };
 
   return (
@@ -56,25 +67,21 @@ export default function Layout({ children, userId, title }: LayoutProps) {
       <main className={styles.main}>
         <AppBar position="sticky" sx={{ width: "100%" }}>
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-              onClick={handleDrawer}
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Gig Work
             </Typography>
-            {/* <Button sx={{ color: '#fff' }}>
+            <Button
+              sx={{ color: "#fff" }}
+              disabled={isSchedule}
+              variant="outlined"
+              onClick={handleScheduleClick}
+            >
               Schedule
             </Button>
-            <Button sx={{ color: '#fff' }}>
+            <Button sx={{ color: "#fff" }} onClick={handleCompareClick}               disabled={!isSchedule}
+>
               Compare
-            </Button > */}
+            </Button>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -105,8 +112,9 @@ export default function Layout({ children, userId, title }: LayoutProps) {
             </Menu>
           </Toolbar>
         </AppBar>
-        <AppDrawer open={open} onClose={handleDrawerClose}/>
-        {children}
+        <div style={{ height: "100%" }}>
+            {children}
+        </div>
       </main>
       <footer className={styles.footer}>UT Austin HAI LAB</footer>
     </div>

@@ -1,12 +1,15 @@
 import "../styles/globals.css";
 import React from "react";
-import { AuthProvider } from "../components/AuthProvider";
 import type { AppProps } from "next/app";
+import { LocationProvider } from "../components/Provider/Location";
+import { AuthProvider } from "../components/Provider/Auth";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <LocationProvider>
+        <Component {...pageProps} />
+      </LocationProvider>
     </AuthProvider>
   );
 }

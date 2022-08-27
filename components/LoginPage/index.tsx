@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { SyntheticEvent } from "react";
-import { useAuth, useDispatchAuth } from "../AuthProvider";
-import { users } from "../AuthProvider/users";
+import { useAuth, useDispatchAuth } from "../Provider/Auth";
+import { users } from "../Provider/Auth/users";
 import Layout from "../Layout";
 
 export default function Login() {
@@ -25,7 +25,7 @@ export default function Login() {
   };
 
   return (
-    <Layout title="Login" userId={userId}>
+    <Layout userId={userId}>
       <Typography variant="h5">Please Select User</Typography>
       
       <FormControl sx={{width: 200, height: '100%'}}>

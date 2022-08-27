@@ -1,8 +1,14 @@
 import React, { ReactElement, useState } from "react";
-import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import { Box, Tab, Tabs } from "@mui/material";
+import AggregateEarningsPerDay from "../Aggregate/DayOfWeek";
+import AggregateEarningsPerHour from "../Aggregate/Hourly";
+import AggregateEarningsPerLocation from "../Aggregate/Location";
+import PersonalEarningsPerDay from "../Personal/DayOfWeek";
+import PersonalEarningsPerHour from "../Personal/Hourly";
+import PersonalEarningsPerLocation from "../Personal/Location";
 import PanelContainer from "./PanelContainer";
+import { useAuth } from "../../Provider/Auth";
+import { users } from "../../Provider/Auth/users";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -13,10 +19,6 @@ export type Tab = {
   title: string;
   aggregate: ReactElement;
   personal?: ReactElement;
-};
-
-type DisplayPanelProps = {
-  tabs: Tab[];
 };
 
 function TabPanel(props: TabPanelProps) {
@@ -31,7 +33,7 @@ function TabPanel(props: TabPanelProps) {
       style={{ flex: 1 }}
       {...other}
     >
-      {value === index && <Box >{children}</Box>}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -43,9 +45,33 @@ function a11yProps(index: number) {
   };
 }
 
-const DisplayPanel = ({ tabs }: DisplayPanelProps) => {
+const DisplayPanel = () => {
   const [value, setValue] = useState(0);
+  const userId = useAuth();
 
+  const tabs: Tab[] = [
+    {
+      title: "Hourly",
+      aggregate: <AggregateEarningsPerHour />,
+      personal: userId ? (
+        <PersonalEarningsPerHour id={userId} name={users[userId - 1]} />
+      ) : undefined,
+    },
+    {
+      title: "Day Of Week",
+      aggregate: <AggregateEarningsPerDay />,
+      personal: userId ? (
+        <PersonalEarningsPerDay id={userId} name={users[userId - 1]} />
+      ) : undefined,
+    },
+    {
+      title: "Location",
+      aggregate: <AggregateEarningsPerLocation />,
+      personal: userId ? (
+        <PersonalEarningsPerLocation id={userId} name={users[userId - 1]} />
+      ) : undefined,
+    },
+  ];
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
