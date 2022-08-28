@@ -7,7 +7,6 @@ import { useAppLocation } from "../Provider/Location";
 const Home: NextPage = () => {
   const userId = useAuth();
   const currentPage = useAppLocation();
-  console.log(currentPage)
   return (
     <Layout userId={userId}>
       <ContentArea page={currentPage} />

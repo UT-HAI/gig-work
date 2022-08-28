@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import { Box } from "@mui/system";
 import { Divider, Fab } from "@mui/material";
@@ -10,11 +10,13 @@ const MinigamePage: NextPage = () => {
   const [compare, setCompare] = useState(false);
   const userId = useAuth();
 
+
   const handleTryAgain = () => {
     setTryAgain(true);
   };
   const handleCompare = () => {
     setCompare(true);
+    setTryAgain(false);
   };
 
   const handleStartOver = () => {
@@ -24,19 +26,27 @@ const MinigamePage: NextPage = () => {
   return (
     <>
       <Box
+        id="Schedule"
         sx={{
-          p: 2,
           width: "100%",
           height: "100%",
-          display: "flex",
-          flexDirection: "row",
         }}
       >
-        <Minigame show={!tryAgain || compare} />
-        {compare && (
-          <Divider flexItem orientation="vertical" sx={{ borderWidth: 1 }} />
-        )}
-        <Minigame show={tryAgain || compare} />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: compare ? "row" : "column",
+            width: "50%",
+            position: "absolute",
+            top: tryAgain ? -2027 : 0,
+          }}
+        >
+          <Minigame id="BaseMinigame" show={!tryAgain || compare} />
+          {compare && (
+            <Divider flexItem orientation="vertical" sx={{ borderWidth: 1 }} />
+          )}
+          <Minigame id="RetryMinigame" show={tryAgain || compare} />
+        </Box>
       </Box>
       <Box
         sx={{

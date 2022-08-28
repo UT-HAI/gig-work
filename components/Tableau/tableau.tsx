@@ -68,11 +68,12 @@
 type TableauVizProps = {
   src: string;
   style?: object;
+  id?: string;
 };
-export default function TableauViz({ src, style }: TableauVizProps) {
+export default function TableauViz({ id, src, style }: TableauVizProps) {
   return (
     <tableau-viz
-      id="tableauViz"
+      id={id ?? "tableauViz"}
       src={src}
       style={style}
       hide-tabs

@@ -6,11 +6,12 @@ import DisplayPanel from "../Tableau/DisplayPanel";
 export default function ContentArea({ page }: { page: number }) {
   return (
     <Box
-      width="200%"
       sx={{
         left: page === 1 ? "-100%" : 0,
         display: "flex",
         position: "absolute",
+        height: '100%',
+        width:"200%"
       }}
     >
       <DisplayPanel />

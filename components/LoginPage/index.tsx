@@ -1,59 +1,74 @@
 import {
   Autocomplete,
+  Box,
+  Card,
+  CardContent,
   FormControl,
-  InputLabel,
-  MenuItem,
   TextField,
-  Select,
-  SelectChangeEvent,
-  Typography,
+  CardHeader,
+  CardActions,
+  Button,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { SyntheticEvent } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { useAuth, useDispatchAuth } from "../Provider/Auth";
 import { users } from "../Provider/Auth/users";
 import Layout from "../Layout";
 
+const options = users.map((user, id) => ({ label: user, id: id + 1 }));
+
 export default function Login() {
   const router = useRouter();
   const userId = useAuth();
+  const [selectedId, setSelectedId] = useState(userId);
   const dispatch = useDispatchAuth();
 
-  const handleChange = (event: SelectChangeEvent) => {
-    dispatch({ type: "SET_USER_ID", payload: event.target.value });
-    router.replace('/')
+  const handleChange = (_: SyntheticEvent, newValue: any) => {
+    console.log(newValue);
+    setSelectedId(newValue?.id);
+  };
+
+  const handleConfirm = () => {
+    dispatch({ type: "SET_USER_ID", payload: selectedId });
+    router.replace("/");
   };
 
   return (
     <Layout userId={userId}>
-      <Typography variant="h5">Please Select User</Typography>
-      
-      <FormControl sx={{width: 200, height: '100%'}}>
-      {/* <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={users.filter(user => !!user).map((user, id) => ({ label: user, id: id + 1}))}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="User" />}
-          value={userId}
-          onChange={handleChange}
-        /> */}
-        <InputLabel id="user-select-label">User</InputLabel>
-        <Select
-          labelId="user-select-label"
-          id="user-select"
-          value={userId || ""}
-          label="User"
-          onChange={handleChange}
-        >
-          {users
-            .map((user, id) => (
-              <MenuItem key={`user_${id}`} value={id + 1}>
-                {user}
-              </MenuItem>
-            ))}
-        </Select>
-      </FormControl>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          background: "#f5f5f5",
+          p: 10,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Card sx={{p: 4, overflow: 'visible'}}>
+          <CardHeader
+            title="Enter or Select User"
+            // titleTypographyProps={{ textAlign: "center" }}
+          />
+          <CardContent>
+            <FormControl sx={{ width: "100%", height: "100%" }}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={options}
+                sx={{ width: 300, '.MuiAutocomplete-popper': { zIndex: 1000} }}
+                renderInput={(params) => <TextField {...params} label="User" />}
+                value={selectedId && options.find(option => option.id === selectedId)}
+                onChange={handleChange}
+              />
+            </FormControl>
+          </CardContent>
+          <CardActions>
+            <Button onClick={handleConfirm}>Confirm</Button>
+          </CardActions>
+        </Card>
+      </Box>
     </Layout>
   );
 }

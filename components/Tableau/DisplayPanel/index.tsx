@@ -33,7 +33,7 @@ function TabPanel(props: TabPanelProps) {
       style={{ flex: 1 }}
       {...other}
     >
-      {value === index && <Box>{children}</Box>}
+      {value === index && <Box height="100%">{children}</Box>}
     </div>
   );
 }
@@ -78,11 +78,13 @@ const DisplayPanel = () => {
 
   return (
     <Box
+      id="Compare"
       sx={{
         flexGrow: 1,
         bgcolor: "background.paper",
         display: "flex",
         pt: 2,
+        pb: 2,
         width: "100%",
       }}
     >

@@ -1,26 +1,22 @@
-import React, {
-  createContext,
-  Dispatch,
-  ReactNode,
-  useContext,
-  useReducer,
-  useState,
-} from "react";
+import React, { ReactNode, useState } from "react";
 import Head from "next/head";
 import {
   AppBar,
+  Box,
   Toolbar,
   IconButton,
-  Menu,
-  MenuItem,
   Typography,
-  Button,
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { users } from "../Provider/Auth/users";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
-import { SCHEDULE_PAGE, useAppLocation, useLocationDispatch } from "../Provider/Location";
+import {
+  SCHEDULE_PAGE,
+  useAppLocation,
+  useLocationDispatch,
+} from "../Provider/Location";
+import TabButton from "./tab";
+import UserMenu from "./menu";
 
 type LayoutProps = {
   children?: ReactNode;
@@ -28,10 +24,11 @@ type LayoutProps = {
 };
 export default function Layout({ children, userId }: LayoutProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-   const router = useRouter();
-   const dispatch = useLocationDispatch()
-   const page = useAppLocation()
-const isSchedule = page === SCHEDULE_PAGE
+  const router = useRouter();
+  const dispatch = useLocationDispatch();
+  const page = useAppLocation();
+  const isSchedule = page === SCHEDULE_PAGE;
+
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -48,7 +45,6 @@ const isSchedule = page === SCHEDULE_PAGE
     dispatch({
       type: "SET_SCHEDULE_PAGE",
     });
-
   };
 
   const handleCompareClick = () => {
@@ -67,21 +63,17 @@ const isSchedule = page === SCHEDULE_PAGE
       <main className={styles.main}>
         <AppBar position="sticky" sx={{ width: "100%" }}>
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div">
               Gig Work
             </Typography>
-            <Button
-              sx={{ color: "#fff" }}
-              disabled={isSchedule}
-              variant="outlined"
-              onClick={handleScheduleClick}
-            >
-              Schedule
-            </Button>
-            <Button sx={{ color: "#fff" }} onClick={handleCompareClick}               disabled={!isSchedule}
->
-              Compare
-            </Button>
+            <Box sx={{ flexGrow: 1, ml: 4, height: 64 }}>
+              <TabButton selected={isSchedule} onClick={handleScheduleClick}>
+                Schedule
+              </TabButton>
+              <TabButton selected={!isSchedule} onClick={handleCompareClick}>
+                Compare
+              </TabButton>
+            </Box>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -92,31 +84,25 @@ const isSchedule = page === SCHEDULE_PAGE
             >
               <AccountCircle />
             </IconButton>
-            <Menu
-              id="menu-appbar"
+            <UserMenu
               anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
               onClose={handleClose}
-            >
-              <MenuItem disabled>{userId && users[userId - 1]}</MenuItem>
-              <MenuItem onClick={handleSwitch}>Switch user</MenuItem>
-            </Menu>
+              onSwitch={handleSwitch}
+              userId={userId}
+            />
           </Toolbar>
         </AppBar>
-        <div style={{ height: "100%" }}>
-            {children}
+        <div
+          style={{
+            height: "100vh",
+            position: "relative",
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
+          {children}
         </div>
       </main>
-      <footer className={styles.footer}>UT Austin HAI LAB</footer>
     </div>
   );
 }
