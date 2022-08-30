@@ -65,7 +65,6 @@ export default function Login() {
   };
 
   return (
-    // <Layout userId={userId}>
       <Box
         sx={{
           width: "100%",
@@ -107,6 +106,5 @@ export default function Login() {
           </CardActions>
         </Card>
       </Box>
-    // </Layout>
   );
 }
