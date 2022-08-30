@@ -65,11 +65,11 @@ export default function Login() {
   };
 
   return (
-    <Layout userId={userId}>
+    // <Layout userId={userId}>
       <Box
         sx={{
           width: "100%",
-          height: "100%",
+          height: "100vh",
           background: "#f5f5f5",
           p: 10,
           display: "flex",
@@ -103,10 +103,10 @@ export default function Login() {
             </FormControl>
           </CardContent>
           <CardActions>
-            <Button onClick={handleConfirm}>Confirm</Button>
+            <Button onClick={handleConfirm}>Submit</Button>
           </CardActions>
         </Card>
       </Box>
-    </Layout>
+    // </Layout>
   );
 }
