@@ -77,9 +77,9 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <Card sx={{ p: 4, overflow: "visible" }}>
+        <Card sx={{ p: 4, overflow: "visible", width: 400 }}>
           <CardHeader
-            title="Enter or Select User"
+            title="Login"
           />
           <CardContent>
             <FormControl sx={{ width: "100%", height: "100%" }}>
