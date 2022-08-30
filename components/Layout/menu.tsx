@@ -5,11 +5,11 @@ import { users } from "../Provider/Auth/users";
 type MenuProps = {
   anchorEl: null | HTMLElement;
   onClose: VoidFunction;
-  onSwitch: VoidFunction;
+  onLogout: VoidFunction;
   userId?: number;
 };
 
-const UserMenu = ({ anchorEl, onClose, userId, onSwitch }: MenuProps) => {
+const UserMenu = ({ anchorEl, onClose, userId, onLogout }: MenuProps) => {
   return (
     <Menu
       id="menu-appbar"
@@ -27,7 +27,7 @@ const UserMenu = ({ anchorEl, onClose, userId, onSwitch }: MenuProps) => {
       onClose={onClose}
     >
       <MenuItem disabled>{userId && users[userId - 1]}</MenuItem>
-      <MenuItem onClick={onSwitch}>Switch user</MenuItem>
+      <MenuItem onClick={onLogout}>Logout</MenuItem>
     </Menu>
   );
 };

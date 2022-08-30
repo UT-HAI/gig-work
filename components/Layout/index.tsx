@@ -17,6 +17,7 @@ import {
 } from "../Provider/Location";
 import TabButton from "./tab";
 import UserMenu from "./menu";
+import { useDispatchAuth } from "../Provider/Auth";
 
 type LayoutProps = {
   children?: ReactNode;
@@ -25,7 +26,8 @@ type LayoutProps = {
 export default function Layout({ children, userId }: LayoutProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const router = useRouter();
-  const dispatch = useLocationDispatch();
+  const authDispatch = useDispatchAuth();
+  const dispatchLocation = useLocationDispatch();
   const page = useAppLocation();
   const isSchedule = page === SCHEDULE_PAGE;
 
@@ -33,22 +35,23 @@ export default function Layout({ children, userId }: LayoutProps) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleSwitch = () => {
-    router.push("/login");
+  const handleLogout = () => {
+    authDispatch({ type: 'LOGOUT'})
     setAnchorEl(null);
+    router.push("/login");
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   const handleScheduleClick = () => {
-    dispatch({
+    dispatchLocation({
       type: "SET_SCHEDULE_PAGE",
     });
   };
 
   const handleCompareClick = () => {
-    dispatch({
+    dispatchLocation({
       type: "SET_COMPARE_PAGE",
     });
   };
@@ -87,7 +90,7 @@ export default function Layout({ children, userId }: LayoutProps) {
             <UserMenu
               anchorEl={anchorEl}
               onClose={handleClose}
-              onSwitch={handleSwitch}
+              onLogout={handleLogout}
               userId={userId}
             />
           </Toolbar>

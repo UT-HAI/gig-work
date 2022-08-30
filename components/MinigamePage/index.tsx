@@ -8,7 +8,6 @@ import { useAuth } from "../Provider/Auth";
 const MinigamePage: NextPage = () => {
   const [tryAgain, setTryAgain] = useState(false);
   const [compare, setCompare] = useState(false);
-  const userId = useAuth();
 
 
   const handleTryAgain = () => {

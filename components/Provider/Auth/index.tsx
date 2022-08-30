@@ -16,15 +16,20 @@ const defaultState = { userId: undefined };
 
 type AuthDispatch = Dispatch<{
   type: string;
-  payload: any;
+  payload?: any;
 }>;
 const AuthStateContext = createContext(undefined);
 const AuthDispatchContext = createContext({} as AuthDispatch);
 
-const reducer = (state: any, action: { type: string; payload: any }) => {
+const reducer = (state: any, action: { type: string; payload?: any }) => {
   switch (action.type) {
     case "SET_USER_ID":
+      { 
+        
       return action.payload;
+    }
+    case "LOGOUT":
+      return undefined;
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
