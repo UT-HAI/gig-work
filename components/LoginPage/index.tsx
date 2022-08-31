@@ -13,7 +13,7 @@ import React, { useState, ChangeEvent } from "react";
 import bcrypt from "bcryptjs";
 import { useAuth, useDispatchAuth } from "../Provider/Auth";
 import { passwords, users } from "../Provider/Auth/users";
-import Layout from "../Layout";
+import upperFirst from 'lodash/upperFirst'
 
 const options = users.map((user, id) => ({ label: user, id: id + 1 }));
 
@@ -44,7 +44,7 @@ export default function Login() {
       setPwError("Please enter a password");
     }
     if (name && password) {
-      let userId = users.indexOf(name) + 1;
+      let userId = users.indexOf(upperFirst(name.toLowerCase())) + 1;
       if (userId === 0) {
         setNameError("User not found");
         return;
