@@ -47,7 +47,7 @@ export const passwords = [
     id: 24,
     pw: "$2a$10$DzbeMnVjJLrft5/2EHK8fuu1pAZhVvOV/0f4TMZDWJNRJK0/mt30y",
   },
-  {id: 31, pw: '$2a$10$gPkPp0k9MK1V3sbgFIhX5O37dPENpy1lxHNKnt58DEJnSlngtpxTS'},
+  {id: 31, pw: '$2a$10$.8wrjwqux9PgfgX3Xm5YI.DTSC0JmTfTDpIy.Vo2ovxTqoBw9FRq.'},
   {id: 32, pw: '$2a$10$cTFxKn6pDqrUN.jKxdlULOX77tQ19HMmA.G57f26PI1C9/lnoRmvK'},
-  {id: 37, pw: '$2a$10$jTIqhS8GDNbVG/OYR8wMduKHhmgXXo1.8cXC5YLG2hCNXflVoMdSG'}
+  {id: 37, pw: '$2a$10$Fwcs4yAE0JaCE7IXSQ7Yge0zXx3MhYhh8NOr14QVUNNk3bf3cmVpG'}
 ];
