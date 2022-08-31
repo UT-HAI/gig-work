@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useState, ChangeEvent } from "react";
 import bcrypt from "bcryptjs";
-import { useAuth, useDispatchAuth } from "../Provider/Auth";
+import { useDispatchAuth } from "../Provider/Auth";
 import { passwords, users } from "../Provider/Auth/users";
 import upperFirst from 'lodash/upperFirst'
 
@@ -19,7 +19,6 @@ const options = users.map((user, id) => ({ label: user, id: id + 1 }));
 
 export default function Login() {
   const router = useRouter();
-  const userId = useAuth();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [nameError, setNameError] = useState(" ");

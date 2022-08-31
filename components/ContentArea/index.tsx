@@ -7,7 +7,7 @@ export default function ContentArea({ page }: { page: number }) {
   return (
     <Box
       sx={{
-        left: page === 1 ? "-100%" : 0,
+        left: page === 0 ? "-100%" : 0,
         display: "flex",
         position: "absolute",
         height: '100%',
