@@ -43,6 +43,7 @@ const PanelContainer = ({ personal, aggregate }: PanelProps) => {
         height: "100%",
         display: "flex",
         flexDirection: "row",
+        overflow: "scroll",
       }}
     >
       <PanelSection>
