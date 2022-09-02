@@ -86,6 +86,7 @@ const DisplayPanel = () => {
         pt: 2,
         pb: 2,
         width: "100%",
+        overflowX: 'scroll'
       }}
     >
       <Tabs
@@ -94,7 +95,7 @@ const DisplayPanel = () => {
         value={value}
         onChange={handleChange}
         aria-label="Tableau Display Panel"
-        sx={{ borderRight: 1, borderColor: "divider" }}
+        sx={{ borderRight: 1, borderColor: "divider", overflow: 'visible' }}
       >
         {tabs.map((tab, index) => (
           <Tab label={tab.title} {...a11yProps(index)} key={`label_${index}`} />
