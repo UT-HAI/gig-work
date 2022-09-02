@@ -77,7 +77,7 @@ export default function TableauViz({ id, src, style }: TableauVizProps) {
       src={src}
       style={style}
       hide-tabs
-      toolbar="hidden"
+      // toolbar="no"
     ></tableau-viz>
   );
 }

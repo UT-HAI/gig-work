@@ -5,6 +5,10 @@ type MinigameProps = {
   id: string;
   show?: boolean;
 };
+
+export const MINIGAME_HEIGHT = 2527;
+const MINIGAME_WIDTH = 650;
+
 export default function Minigame({ show, id }: MinigameProps) {
   return (
     <div
@@ -20,7 +24,7 @@ export default function Minigame({ show, id }: MinigameProps) {
     >
       <TableauViz
         id={id}
-        style={{ width: 1050, height: 2027 }}
+        style={{ width: MINIGAME_WIDTH, height: MINIGAME_HEIGHT }}
         src={
           "https://public.tableau.com/views/GigWorkMini-Game4-withMap/4-TestYourSuccess?:language=en-US&:display_count=n&:origin=viz_share_link"
         }

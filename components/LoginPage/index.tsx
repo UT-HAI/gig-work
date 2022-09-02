@@ -1,3 +1,7 @@
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import { useRouter } from "next/router";
+import bcrypt from "bcryptjs";
+import upperFirst from "lodash/upperFirst";
 import {
   Box,
   Card,
@@ -8,12 +12,8 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
-import { useRouter } from "next/router";
-import React, { useState, ChangeEvent } from "react";
-import bcrypt from "bcryptjs";
 import { useDispatchAuth } from "../Provider/Auth";
 import { passwords, users } from "../Provider/Auth/users";
-import upperFirst from 'lodash/upperFirst'
 
 const options = users.map((user, id) => ({ label: user, id: id + 1 }));
 
@@ -33,6 +33,12 @@ export default function Login() {
   const handlePWChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPwError(" ");
     setPassword(event.target.value);
+  };
+
+  const handleKeyPressed = async (event: KeyboardEvent<HTMLFormElement>) => {
+    if (event.code === "Enter") {
+      handleConfirm();
+    }
   };
 
   const handleConfirm = async () => {
@@ -64,31 +70,37 @@ export default function Login() {
   };
 
   return (
-      <Box
-        sx={{
-          width: "100%",
-          height: "100vh",
-          background: "#f5f5f5",
-          p: 10,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Card sx={{ p: 4, overflow: "visible", width: 400 }}>
-          <CardHeader
-            title="Login"
-          />
-          <CardContent>
-            <FormControl sx={{ width: "100%", height: "100%" }}>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100vh",
+        background: "#f5f5f5",
+        p: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card sx={{ p: 4, overflow: "visible", width: 400 }}>
+        <CardHeader title="Login" />
+        <CardContent>
+          <Box
+            component="form"
+            sx={{ width: "100%", height: "100%" }}
+            onKeyDown={handleKeyPressed}
+          >
+            <FormControl fullWidth>
               <TextField
                 required
                 label="Name"
+                type="text"
                 sx={{ m: "16px 0" }}
                 onChange={handleNameChange}
                 error={!!nameError.trim()}
                 helperText={nameError}
               />
+            </FormControl>
+            <FormControl fullWidth>
               <TextField
                 required
                 label="Password"
@@ -99,11 +111,12 @@ export default function Login() {
                 helperText={pwError}
               />
             </FormControl>
-          </CardContent>
-          <CardActions>
-            <Button onClick={handleConfirm}>Submit</Button>
-          </CardActions>
-        </Card>
-      </Box>
+          </Box>
+        </CardContent>
+        <CardActions>
+          <Button onClick={handleConfirm}>Submit</Button>
+        </CardActions>
+      </Card>
+    </Box>
   );
 }

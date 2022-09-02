@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import type { NextPage } from "next";
 import { Box } from "@mui/system";
 import { Divider, Fab } from "@mui/material";
-import Minigame from "../Tableau/Minigame";
-import { useAuth } from "../Provider/Auth";
+import Minigame, { MINIGAME_HEIGHT } from "../Tableau/Minigame";
 
 const MinigamePage: NextPage = () => {
   const [tryAgain, setTryAgain] = useState(false);
   const [compare, setCompare] = useState(false);
-
 
   const handleTryAgain = () => {
     setTryAgain(true);
@@ -37,7 +35,7 @@ const MinigamePage: NextPage = () => {
             flexDirection: compare ? "row" : "column",
             width: "50%",
             position: "absolute",
-            top: tryAgain ? -2027 : 0,
+            top: tryAgain ? -MINIGAME_HEIGHT : 0,
           }}
         >
           <Minigame id="BaseMinigame" show={!tryAgain || compare} />
