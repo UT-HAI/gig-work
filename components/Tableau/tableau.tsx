@@ -1,3 +1,53 @@
+// @ts-nocheck
+import React, { useMemo } from "react";
+
+// const getHeight = (height?: number | string) => {
+//   if (!height) {
+//     return null;
+//   }
+//   if (typeof height === "number") {
+//     return `${height + 27}px`;
+//   }
+//   if (typeof height === "string") {
+//     return `calc(${height} + 27px)`;
+//   }
+// };
+
+type TableauVizProps = {
+  src: string;
+  style?: object;
+  id?: string;
+  height?: string | number;
+  width?: string | number;
+};
+export default function TableauViz({
+  id,
+  src,
+  style,
+  height,
+  width,
+}: TableauVizProps) {
+  const styleProps = useMemo(() => {
+    let props = style;
+    if (width) {
+      props = { ...props, width };
+    }
+    if (height) {
+      props = { ...props, height };
+    }
+    return props;
+  }, [style, height, width]);
+  return (
+    <tableau-viz
+      id={id ?? "tableauViz"}
+      src={src}
+      style={styleProps}
+      hide-tabs
+      // toolbar="no"
+    ></tableau-viz>
+  );
+}
+
 // import {
 // //   TableauViz,
 //   TableauEventType,
@@ -63,21 +113,3 @@
 // };
 
 // export default SimpleReport;
-
-// @ts-nocheck
-type TableauVizProps = {
-  src: string;
-  style?: object;
-  id?: string;
-};
-export default function TableauViz({ id, src, style }: TableauVizProps) {
-  return (
-    <tableau-viz
-      id={id ?? "tableauViz"}
-      src={src}
-      style={style}
-      hide-tabs
-      // toolbar="no"
-    ></tableau-viz>
-  );
-}

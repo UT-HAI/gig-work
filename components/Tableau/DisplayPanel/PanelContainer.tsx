@@ -9,6 +9,7 @@ const PanelSection = ({ children }: { children: ReactNode }) => (
       height: "100%",
       display: "flex",
       flexDirection: "column",
+      overflow: 'auto'
     }}
   >
     {children}
@@ -43,7 +44,6 @@ const PanelContainer = ({ personal, aggregate }: PanelProps) => {
         height: "100%",
         display: "flex",
         flexDirection: "row",
-        overflow: "scroll",
       }}
     >
       <PanelSection>

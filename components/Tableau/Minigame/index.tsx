@@ -1,4 +1,6 @@
 import React from "react";
+import useAppBarHeight from "../../hooks/useAppBarHeight";
+import { STEPPER_HEIGHT } from "../../ScheduleStepper";
 import TableauViz from "../tableau";
 
 type MinigameProps = {
@@ -10,11 +12,12 @@ export const MINIGAME_HEIGHT = 2527;
 const MINIGAME_WIDTH = 650;
 
 export default function Minigame({ show, id }: MinigameProps) {
+  const appBarHeight = useAppBarHeight();
   return (
     <div
       style={{
         width: "100%",
-        height: "calc(100vh - 64px)",
+        height: `calc(100vh - ${appBarHeight}px - (${STEPPER_HEIGHT}))`,
         display: "flex",
         justifyContent: "center",
         visibility: show ? "visible" : "hidden",

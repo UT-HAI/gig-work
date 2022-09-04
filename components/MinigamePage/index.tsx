@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import type { NextPage } from "next";
 import { Box } from "@mui/system";
-import { Divider, Fab } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import Minigame, { MINIGAME_HEIGHT } from "../Tableau/Minigame";
+import ScheduleStepper, { STEPPER_HEIGHT } from "../ScheduleStepper";
 
 const MinigamePage: NextPage = () => {
   const [tryAgain, setTryAgain] = useState(false);
@@ -29,6 +30,11 @@ const MinigamePage: NextPage = () => {
           height: "100%",
         }}
       >
+        <ScheduleStepper
+          onCompare={handleCompare}
+          onStartOver={handleStartOver}
+          onTryAgain={handleTryAgain}
+        />
         <Box
           sx={{
             display: "flex",
@@ -36,6 +42,7 @@ const MinigamePage: NextPage = () => {
             width: "50%",
             position: "absolute",
             top: tryAgain ? -MINIGAME_HEIGHT : 0,
+            mt: `calc(${STEPPER_HEIGHT})`,
           }}
         >
           <Minigame id="BaseMinigame" show={!tryAgain || compare} />
@@ -44,34 +51,6 @@ const MinigamePage: NextPage = () => {
           )}
           <Minigame id="RetryMinigame" show={tryAgain || compare} />
         </Box>
-      </Box>
-      <Box
-        sx={{
-          "& > :not(style)": { m: 1 },
-          position: "absolute",
-          right: 16,
-          bottom: 16,
-        }}
-      >
-        <Fab
-          color="primary"
-          variant="extended"
-          disabled={compare || tryAgain}
-          onClick={handleTryAgain}
-        >
-          Try Again
-        </Fab>
-        <Fab
-          color="primary"
-          variant="extended"
-          disabled={!tryAgain || compare}
-          onClick={handleCompare}
-        >
-          Compare
-        </Fab>
-        <Fab color="primary" variant="extended" onClick={handleStartOver}>
-          Start Over
-        </Fab>
       </Box>
     </>
   );

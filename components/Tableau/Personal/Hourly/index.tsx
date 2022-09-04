@@ -11,6 +11,7 @@ export default function PersonalEarningsPerHour({ id, name }: PersonalProps) {
     <>
       <TableauViz
         src={`https://public.tableau.com/views/ID${id}-${name}/AverageEarningsbyHour?:language=en-US&:display_count=n&:origin=viz_share_link`}
+        height="100%"
         style={{ width: "100%", flex: 1 }}
       />
     </>

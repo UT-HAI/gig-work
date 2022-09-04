@@ -84,9 +84,9 @@ const DisplayPanel = () => {
         bgcolor: "background.paper",
         display: "flex",
         pt: 2,
-        pb: 2,
         width: "100%",
-        overflowX: 'scroll'
+        overflowX: 'scroll',
+        overflowY: 'hidden'
       }}
     >
       <Tabs
