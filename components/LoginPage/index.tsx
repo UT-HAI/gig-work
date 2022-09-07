@@ -13,7 +13,8 @@ import {
   Button,
 } from "@mui/material";
 import { useDispatchAuth } from "../Provider/Auth";
-import { passwords, users } from "../Provider/Auth/users";
+import { emails, passwords, users } from "../Provider/Auth/users";
+import isEmail from "../../utils/email";
 
 const options = users.map((user, id) => ({ label: user, id: id + 1 }));
 
@@ -49,7 +50,13 @@ export default function Login() {
       setPwError("Please enter a password");
     }
     if (name && password) {
-      let userId = users.indexOf(upperFirst(name.toLowerCase())) + 1;
+      let userId: any
+      if (isEmail(name)) {
+        userId = emails.indexOf(name) + 1
+      } else {
+        userId = users.indexOf(upperFirst(name.toLowerCase())) + 1;
+      }
+
       if (userId === 0) {
         setNameError("User not found");
         return;
@@ -92,7 +99,7 @@ export default function Login() {
             <FormControl fullWidth>
               <TextField
                 required
-                label="Name"
+                label="Username/Email"
                 type="text"
                 sx={{ m: "16px 0" }}
                 onChange={handleNameChange}

@@ -36,8 +36,63 @@ export const users = [
   "Alison",
   "",
   "David",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "David",
 ];
 
+export const emails = [
+  "juananaya60477@gmail.com",
+  "",
+  "",
+  "",
+  "omerchanm@gmail.com",
+  "",
+  "ba.khan973@gmail.com",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "gmacariola@gmail.com",
+  "ruz925@yahoo.com",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "tzhao07@yahoo.com",
+  "matthewdurso@yahoo.com",
+  "",
+  "",
+  "aap99@yahoo.com",
+  "",
+  "drvrchgo1@gmail.com",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "buda55@hotmail.com",
+];
+
+/*
+ * brcypt-ed passwords
+ */
 export const passwords = [
   { id: 1, pw: "$2a$10$r/PfMc9ctBFLAKjKgWSIkuFdCLbQ.RdjNIDJcZV.UIeucrAU7zNsG" },
   { id: 5, pw: "$2a$10$5WkKCjM.hFR6PsgR.uGbwOjpF0bpgaIt3P/nY7QExCT6mDShYegTa" },
@@ -65,5 +120,9 @@ export const passwords = [
   {
     id: 37,
     pw: "$2a$10$Fwcs4yAE0JaCE7IXSQ7Yge0zXx3MhYhh8NOr14QVUNNk3bf3cmVpG",
+  },
+  {
+    id: 43,
+    pw: "$2a$10$q./rV.Y9QgjRvE6MZfLG0eEWDUnYzJRqSxKZMyzQeH7M5xb2grboC", // different pw convention
   },
 ];
