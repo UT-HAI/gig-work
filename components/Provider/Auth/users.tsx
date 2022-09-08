@@ -42,6 +42,7 @@ export const users = [
   "",
   "",
   "David",
+  "Fiona",
 ];
 
 export const emails = [
@@ -88,6 +89,7 @@ export const emails = [
   "",
   "",
   "buda55@hotmail.com",
+  "fionav1968@gmail.com",
 ];
 
 /*
@@ -125,4 +127,8 @@ export const passwords = [
     id: 43,
     pw: "$2a$10$q./rV.Y9QgjRvE6MZfLG0eEWDUnYzJRqSxKZMyzQeH7M5xb2grboC", // different pw convention
   },
+  {
+    id: 44,
+    pw: "$2a$10$JqNAko4V3EOL6mUgUNAqF.12bs56MXMR4iAYUQ7a3ZJwGk26aFI0O"
+  }
 ];
